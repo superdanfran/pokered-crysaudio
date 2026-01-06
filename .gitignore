@@ -29,3 +29,7 @@
 *.sn*
 *.sa*
 *.sg1
+/.vs/pokered-crysaudio/FileContentIndex
+/.vs/pokered-crysaudio/v17
+*.sqlite
+/.vs/VSWorkspaceState.json
