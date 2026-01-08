@@ -2084,6 +2084,8 @@ wWalkBikeSurfState:: db
 
 	ds 10
 
+wDumbByteToToggleStatusScreen:: db ; new
+
 wTownVisitedFlag:: flag_array NUM_CITY_MAPS
 
 ; starts at 502
@@ -2216,7 +2218,8 @@ ENDU
 
 wTrainerHeaderPtr:: dw
 
-	ds 6
+	ds 3 ; UNUSED bytes in "Main Data"; edited, was 6
+wMultiUseBuffer:: db ; new, for various buffer purposes
 
 ; the trainer the player must face after getting a wrong answer in the Cinnabar
 ; gym quiz
