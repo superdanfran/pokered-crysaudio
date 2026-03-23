@@ -34,13 +34,15 @@ LoadHpBarAndStatusTilePatterns::
 	ld de, HpBarAndStatusGraphics
 	ld hl, vChars2 tile $62
 	lb bc, BANK(HpBarAndStatusGraphics), (HpBarAndStatusGraphicsEnd - HpBarAndStatusGraphics) / $10
-	call GoodCopyVideoData
+	call GoodCopyVideoData ; if LCD is on, transfer during V-blank
 	ld de, EXPBarGraphics
 	ld hl, vChars1 tile $40
 	lb bc, BANK(EXPBarGraphics), (EXPBarGraphicsEnd - EXPBarGraphics) / $10
+	jp GoodCopyVideoData
+
 GoodCopyVideoData:
 	ldh a, [rLCDC]
-	bit 7, a ; is the LCD enabled?
+	bit B_LCDC_ENABLE, a
 	jp nz, CopyVideoData ; if LCD is on, transfer during V-blank
 	ld a, b
 	push hl
@@ -55,4 +57,4 @@ GoodCopyVideoData:
 	ld c, l
 	pop hl
 	pop de
-	jp FarCopyData2 ; if LCD is off, transfer all at once
+	jp FarCopyData2 ; if LCD is off, transfer all at once	
